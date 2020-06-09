@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Interface">
       <UniqueIdentifier>{c73bf8e7-f257-4bb0-b688-77c913597b27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Architecture">
+      <UniqueIdentifier>{89db20ee-e2cd-42c0-b007-88948b2cb6db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Architecture">
+      <UniqueIdentifier>{9242ae12-1da4-439a-b7d6-09e67db14074}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Graphics.h">
@@ -32,6 +38,15 @@
     </ClInclude>
     <ClInclude Include="Interface\Target.h">
       <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Architecture\Memory.h">
+      <Filter>Header Files\Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="Bootstrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Architecture\Video.h">
+      <Filter>Header Files\Architecture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +58,15 @@
     </ClCompile>
     <ClCompile Include="Interface\Target.cpp">
       <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Architecture\Memory.cpp">
+      <Filter>Source Files\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="Bootstrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Architecture\Video.cpp">
+      <Filter>Source Files\Architecture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ void Headless::stop() {
 
 SDLTarget::SDLTarget(uint32_t* in_pixels, int in_width, int in_height, bool full_screen) : pixels(in_pixels), width(in_width), height(in_height), full_screen(full_screen) {
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Clarisse79", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+	window = SDL_CreateWindow("Clx79", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 	if (full_screen) {
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 	}

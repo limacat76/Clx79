@@ -6,6 +6,9 @@
 #include <boost/program_options.hpp>
 #include "Graphics/Graphics.h"
 #include "Interface/Target.h"
+#include "Architecture/Memory.h"
+#include "Architecture/Video.h"
+#include "Bootstrap.h"
 
 namespace options = boost::program_options;
 
@@ -23,66 +26,20 @@ template <typename T> T getParameter(options::variables_map value_map, std::stri
 	return result;
 }
 
-void upscale_picture(pixel *&image, pixel *&render, const int &width, const int &logical_height, const int &physical_height) {
-	// TODO need to calculate the aspect ratio, but now we are assuming that:
-	// horizontal is fixed
-	// vertical physical is delta + two times logical vertical (480 - (200 * 2) = 80)
-	int v_upscale = logical_height  * 2;
-	int v_band = (physical_height - v_upscale) / 2;
-
-	int ys = 0;
-	for (int y = v_band; y < v_band + v_upscale; y += 2, ys++) {
-		for (int x = 0; x < width; x++) {
-			render[x + y * width] = image[x + ys * width];
-			render[x + (y + 1) * width] = image[x + ys * width];
-		}
-	}
-}
-
-void make_picture_stripes(pixel* a_picture, int width, int height) {
-	bool green = false;
-	for (int row = 0; row < height; row++) {
-		int new_row = row % 8;
-		if (new_row == 0) {
-			green = !green;
-		}
-		for (int column = 0; column < width; column++) {
-			a_picture[row * width + column] = (green ? 0xff00ff00 : 0xff000000);
-		}
-	}
-}
-
-void make_picture_checkers(pixel* a_picture, int width, int height) {
-	bool green = false;
-	for (int row = 0; row < height; row++) {
-		int new_row = row % 8;
-		if (new_row == 0) {
-			green = !green;
-		}
-		int new_column = 0;
-		bool r_green = green;
-		for (int column = 0; column < width; column++, new_column++) {
-			if (new_column >= 8) {
-				new_column = 0;
-				r_green = !r_green;
-			}
-			a_picture[row * width + column] = (r_green ? 0xff00ff00 : 0xff000000);
-		}
-	}
-}
-
-void run_engine(const int &no_threads, const int &width, const int &logical_height, const int &physical_height, pixel *&render, Target *target, const bool &log_threads, const bool &log_total) {
+void run_engine(const int &no_threads, const int &width, const int &logical_height, const int &physical_height,
+	            pixel *&render, Target *target, const bool &log_threads, const bool &log_total, byte *&ram) {
 	pixel* image = new pixel[width * logical_height];
 	make_picture_blank(image, width, logical_height);
 	bool quit = false;
 	bool allClosed = false;
 	int frames = 0;
 	while (!quit) {
-		make_picture_checkers(image, width, logical_height);
+		display_ram(image, width, logical_height, ram, 0x0000, 0x1000);
 		upscale_picture(image, render, width, logical_height, physical_height);
 
 		target->loop(quit, frames, allClosed);
 	}
+	delete image;
 }
 
 int main(int argc, char *argv[])
@@ -98,6 +55,7 @@ int main(int argc, char *argv[])
 		("auto-quit", options::value<bool>()->default_value(true)->implicit_value(true), "set auto-quit for profiling")
 		("engine", options::value<int>()->default_value(0), "set engine, 0 for Message, 1 for Checkers, 2 for Lines ")
 		("target", options::value<int>()->default_value(0), "set target, 0 for SDL, 1 for Headless")
+		("color", options::value<int>()->default_value(1), "set color, 0 for green, 1 for amber, 2 for white")
 		;
 
 	options::variables_map vm;
@@ -117,6 +75,8 @@ int main(int argc, char *argv[])
 	bool auto_quit = getParameter<bool>(vm, "auto-quit");
 	int target_number = getParameter<int>(vm, "target");
 
+	set_render_color(getParameter<int>(vm, "color"));
+
 	int width = 640;
 	int logical_height = 200;
 	int physical_height = 480;
@@ -133,7 +93,13 @@ int main(int argc, char *argv[])
 		break;
 	}
 	target->set_auto_continue(false);
-	run_engine(1, width, logical_height, physical_height, render, target, false, false);
+
+	byte* ram = new byte[4096 * 4];
+	clear(ram, 0x05, 4096 * 4);
+	patch(ram, hello_world(), 0x0000);
+	patch(ram, characters(), 0x1000);
+
+	run_engine(1, width, logical_height, physical_height, render, target, false, false, ram);
 
 	if (!auto_quit) {
 		std::cin.clear();
@@ -143,6 +109,10 @@ int main(int argc, char *argv[])
 		_getch();
 #pragma warning( pop )
 	}
+
+	delete render;
+	delete target;
+	delete ram;
 
 	return 0;
 }
