@@ -1,6 +1,3 @@
-// Clx79.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <conio.h>
 #include <boost/program_options.hpp>
@@ -56,6 +53,7 @@ int main(int argc, char *argv[])
 		("engine", options::value<int>()->default_value(0), "set engine, 0 for Message, 1 for Checkers, 2 for Lines ")
 		("target", options::value<int>()->default_value(0), "set target, 0 for SDL, 1 for Headless")
 		("color", options::value<int>()->default_value(1), "set color, 0 for green, 1 for amber, 2 for white")
+		("rom-file", options::value<std::string>()->default_value("roms/ascii_short.txt"), "load the default textfile as rom")
 		;
 
 	options::variables_map vm;
@@ -71,7 +69,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	std::cout << "Hello World!\n";
 	bool auto_quit = getParameter<bool>(vm, "auto-quit");
 	int target_number = getParameter<int>(vm, "target");
 
@@ -97,14 +94,8 @@ int main(int argc, char *argv[])
 	byte* ram = new byte[4096 * 4];
 	clear(ram, 0x05, 4096 * 4);
 
-	std::vector<Patch> patches = read_patches();
-
-	for (std::vector<Patch>::const_iterator i = patches.begin(); i != patches.end(); ++i) {
-		patch(ram, (*i));
-	}
-
-	// TODO D.I Remove and change with the actual loader...
-	patches = manual_loader_test();
+	std::string rom_file = getParameter<std::string>(vm, "rom-file");
+	std::vector<Patch> patches = file_loader_test(rom_file);
 	for (std::vector<Patch>::const_iterator i = patches.begin(); i != patches.end(); ++i) {
 		patch(ram, (*i));
 	}

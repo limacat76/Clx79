@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Architecture">
       <UniqueIdentifier>{9242ae12-1da4-439a-b7d6-09e67db14074}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\roms">
+      <UniqueIdentifier>{79b49fef-8bc6-4978-8506-e1e9b1fe9ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Graphics.h">
@@ -68,5 +71,10 @@
     <ClCompile Include="Architecture\Video.cpp">
       <Filter>Source Files\Architecture</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="roms\ascii_short.txt">
+      <Filter>Resource Files\roms</Filter>
+    </Text>
   </ItemGroup>
 </Project>

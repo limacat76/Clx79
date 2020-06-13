@@ -1,8 +1,7 @@
 #pragma once
 #include "Architecture/Memory.h"
+#include <string>
 #include <vector>
-
-std::vector<Patch> read_patches();
 
 namespace memory_loader {
 
@@ -14,4 +13,4 @@ namespace memory_loader {
 
 }
 
-std::vector<Patch> manual_loader_test();
+std::vector<Patch> file_loader_test(std::string filename);
