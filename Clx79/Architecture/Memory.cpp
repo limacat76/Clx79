@@ -1,7 +1,7 @@
 #include "Memory.h"
 
 void patch(byte* target, Patch patch) {
-	for (int x = 0; x < patch.size; x++) {
+	for (int x = 0; x < patch.content.size(); x++) {
 		target[patch.destination + x] = patch.content[x];
 	}
 }
