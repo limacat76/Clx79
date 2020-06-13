@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
 #ifdef _DEBUG
 	printDefines();
 #endif
+	// TODO D.I Remove and change with the actual loader...
+	manual_loader_test();
 
 	// Declare the supported options.
 	options::options_description desc("Allowed options");
@@ -96,8 +98,12 @@ int main(int argc, char *argv[])
 
 	byte* ram = new byte[4096 * 4];
 	clear(ram, 0x05, 4096 * 4);
-	patch(ram, hello_world(), 0x0000);
-	patch(ram, characters(), 0x1000);
+
+	std::vector<Patch> patches = read_patches();
+
+	for (std::vector<Patch>::const_iterator i = patches.begin(); i != patches.end(); ++i) {
+		patch(ram, (*i));
+	}
 
 	run_engine(1, width, logical_height, physical_height, render, target, false, false, ram);
 

@@ -5,10 +5,11 @@ typedef uint8_t byte;
 
 struct Patch
 {
+	size_t destination;
 	size_t size;
 	byte* content;
 };
 
-void patch(byte* target, Patch patch, size_t destination);
+void patch(byte* target, Patch patch);
 
 void clear(byte* target, byte content, size_t size);

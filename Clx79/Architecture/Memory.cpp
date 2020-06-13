@@ -1,8 +1,8 @@
 #include "Memory.h"
 
-void patch(byte* target, Patch patch, size_t destination) {
+void patch(byte* target, Patch patch) {
 	for (int x = 0; x < patch.size; x++) {
-		target[destination + x] = patch.content[x];
+		target[patch.destination + x] = patch.content[x];
 	}
 }
 

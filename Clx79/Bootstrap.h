@@ -1,6 +1,17 @@
 #pragma once
 #include "Architecture/Memory.h"
+#include <vector>
 
-Patch hello_world();
+std::vector<Patch> read_patches();
 
-Patch characters();
+namespace memory_loader {
+
+	void make_new_patch();
+
+	Patch get_current_patch();
+
+	void push_byte();
+
+}
+
+void manual_loader_test();
