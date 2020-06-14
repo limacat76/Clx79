@@ -51,6 +51,9 @@
     <ClInclude Include="Architecture\Video.h">
       <Filter>Header Files\Architecture</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clx79.cpp">
@@ -76,5 +79,13 @@
     <Text Include="roms\ascii_short.txt">
       <Filter>Resource Files\roms</Filter>
     </Text>
+    <Text Include="roms\chargen.txt">
+      <Filter>Resource Files\roms</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Clx79.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

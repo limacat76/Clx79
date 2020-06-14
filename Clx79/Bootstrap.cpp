@@ -1,3 +1,26 @@
+/**
+MIT License
+
+Copyright (c) 2020 Davide Inglima <limacat@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
 #include "Bootstrap.h"
 #include <stdint.h>
 #include <iostream>
@@ -14,7 +37,7 @@
 namespace memory_loader {
 
 	void make_new_patch(const unsigned int destination, std::vector<Patch>& p) {
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 		std::cout << "make_new_patch: at " << destination << " vector_size: " << p.size() << std::endl;
 #endif
 		Patch new_patch;
@@ -24,7 +47,7 @@ namespace memory_loader {
 
 	Patch* get_current_patch(std::vector<Patch>& p) {
 		if (p.size() == 0) {
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 			std::cout << "created a new patch" << std::endl;
 #endif
 			Patch new_patch;
@@ -35,12 +58,12 @@ namespace memory_loader {
 	}
 
 	void push_byte(const unsigned int value, std::vector<Patch>& p) {
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 		std::cout << "push_byte: value" << value << " vector_size: " << p.size() << std::endl;
 #endif
 		Patch* target = get_current_patch(p);
 		target->content.push_back(value);
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 		std::cout << "push_byte: content_size now: " << target->content.size() << std::endl;
 #endif
 	}
@@ -137,7 +160,7 @@ std::vector<Patch> file_loader_test(std::string filename) {
 			std::vector<unsigned int> v;
 			if (memory_loader::parse_bytes(line.begin(), line.end(), v, p))
 			{
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 				std::cout << "-------------------------\n";
 				std::cout << line << " Parses OK: " << std::endl;
 				std::cout << "\n-------------------------\n";
@@ -147,7 +170,7 @@ std::vector<Patch> file_loader_test(std::string filename) {
 			}
 			else
 			{
-#ifdef _DEBUG
+#ifdef DEBUG_PATCHING_MESSAGES
 				std::cout << "-------------------------\n";
 				std::cout << line << " Parsing failed\n";
 				std::cout << "-------------------------\n";

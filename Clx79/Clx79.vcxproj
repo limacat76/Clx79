@@ -165,6 +165,7 @@
     <ClInclude Include="Bootstrap.h" />
     <ClInclude Include="Graphics\Graphics.h" />
     <ClInclude Include="Interface\Target.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Architecture\Memory.cpp" />
@@ -176,6 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="roms\ascii_short.txt" />
+    <Text Include="roms\chargen.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Clx79.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

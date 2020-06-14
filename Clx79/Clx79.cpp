@@ -1,3 +1,26 @@
+/**
+MIT License
+
+Copyright (c) 2020 Davide Inglima <limacat@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
 #include <iostream>
 #include <conio.h>
 #include <boost/program_options.hpp>
@@ -11,7 +34,10 @@ namespace options = boost::program_options;
 
 #ifdef _DEBUG
 void printDefines() {
-	std::cout << "Additional defines go here \n";
+	std::cout << "Additional defines go here " << std::endl;
+#ifdef DEBUG_PATCHING_MESSAGES
+	std::cout << "DEBUG_PATCHING_MESSAGES" << std::endl;
+#endif
 }
 #endif
 
@@ -53,7 +79,8 @@ int main(int argc, char *argv[])
 		("engine", options::value<int>()->default_value(0), "set engine, 0 for Message, 1 for Checkers, 2 for Lines ")
 		("target", options::value<int>()->default_value(0), "set target, 0 for SDL, 1 for Headless")
 		("color", options::value<int>()->default_value(1), "set color, 0 for green, 1 for amber, 2 for white")
-		("rom-file", options::value<std::string>()->default_value("roms/ascii_short.txt"), "load the default textfile as rom")
+		("rom-file", options::value<std::string>()->default_value("roms/chargen.txt"), "load the default textfile as rom")
+		// ("rom-file", options::value<std::string>()->default_value("roms/ascii_short.txt"), "load the default textfile as rom")
 		;
 
 	options::variables_map vm;
@@ -92,7 +119,7 @@ int main(int argc, char *argv[])
 	target->set_auto_continue(false);
 
 	byte* ram = new byte[4096 * 4];
-	clear(ram, 0x05, 4096 * 4);
+	clear(ram, 0x20, 4096 * 4);
 
 	std::string rom_file = getParameter<std::string>(vm, "rom-file");
 	std::vector<Patch> patches = file_loader_test(rom_file);
