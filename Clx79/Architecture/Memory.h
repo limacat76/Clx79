@@ -27,10 +27,18 @@ SOFTWARE.
 
 typedef uint8_t byte;
 
+typedef uint16_t word;
+
 struct Patch
 {
 	size_t destination;
 	std::vector<byte> content;
+};
+
+struct Cpu
+{
+	// stack pointer
+	word sp;
 };
 
 void patch(byte* target, Patch patch);
