@@ -38,6 +38,8 @@ have the DLL installed on the system.
 
 ## Version History
 
+2020 06 20 Completed the Ascii 7-Bit characters for Chargen
+
 2020 06 13 Now the program can read a file with the instructions on how to load the content in ram.
 
 2020 06 09 First implementation of the video chip.
