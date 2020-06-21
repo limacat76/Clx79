@@ -164,7 +164,7 @@
     <ClInclude Include="Architecture\Video.h" />
     <ClInclude Include="Host\Graphics.h" />
     <ClInclude Include="Host\Patcher.h" />
-    <ClInclude Include="Interface\Target.h" />
+    <ClInclude Include="Host\Renderer.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +173,7 @@
     <ClCompile Include="Clx79.cpp" />
     <ClCompile Include="Host\Graphics.cpp" />
     <ClCompile Include="Host\Patcher.cpp" />
-    <ClCompile Include="Interface\Target.cpp" />
+    <ClCompile Include="Host\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="roms\ascii_short.txt" />

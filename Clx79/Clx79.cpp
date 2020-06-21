@@ -25,10 +25,10 @@ SOFTWARE.
 #include <conio.h>
 #include <boost/program_options.hpp>
 #include "Host/Graphics.h"
-#include "Interface/Target.h"
+#include "Host/Patcher.h"
+#include "Host/Renderer.h"
 #include "Architecture/Memory.h"
 #include "Architecture/Video.h"
-#include "Host/Patcher.h"
 
 namespace options = boost::program_options;
 
@@ -52,7 +52,7 @@ template <typename T> T getParameter(options::variables_map value_map, std::stri
 using Host::Graphics::pixel;
 
 void run_engine(const int &no_threads, const int &width, const int &logical_height, const int &physical_height,
-	            pixel *&render, Target *target, const bool &log_threads, const bool &log_total, byte *&ram) {
+	            pixel *&render, Host::Renderer::Target *target, const bool &log_threads, const bool &log_total, byte *&ram) {
 	pixel* image = new pixel[width * logical_height];
 	Host::Graphics::make_picture_blank(image, width, logical_height);
 	bool quit = false;
@@ -108,14 +108,14 @@ int main(int argc, char *argv[])
 	int physical_height = 480;
 	pixel* render = new pixel[width * physical_height];
 	Host::Graphics::make_picture_black(render, width, physical_height);
-	Target* target;
+	Host::Renderer::Target* target;
 	switch (target_number) {
 	case 0:
-		target = new SDLTarget(render, width, physical_height, false);
+		target = new Host::Renderer::SDLTarget(render, width, physical_height, false);
 		break;
 	case 1:
 	default:
-		target = new Headless();
+		target = new Host::Renderer::Headless();
 		break;
 	}
 	target->set_auto_continue(false);

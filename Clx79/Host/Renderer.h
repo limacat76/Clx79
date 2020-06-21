@@ -24,44 +24,50 @@ SOFTWARE.
 #pragma once
 #include <SDL.h>
 
-class Target {
-public:
-	virtual void loop(bool &quit, int &frames, bool &allClosed) = 0;
+namespace Host {
+	namespace Renderer {
 
-	virtual void stop() = 0;
+		class Target {
+		public:
+			virtual void loop(bool &quit, int &frames, bool &allClosed) = 0;
 
-	void set_auto_continue(bool var);
+			virtual void stop() = 0;
 
-protected:
-	bool auto_continue = false;
-};
+			void set_auto_continue(bool var);
 
-class Headless : public Target {
-public:
-	void loop(bool &quit, int &frames, bool &allClosed);
+		protected:
+			bool auto_continue = false;
+		};
 
-	void stop();
-};
+		class Headless : public Target {
+		public:
+			void loop(bool &quit, int &frames, bool &allClosed);
 
-class SDLTarget : public Target {
-protected:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	SDL_Texture* texture;
-	SDL_Event event;
-	int remainingFrames = 60;
-	bool copy = true;
-	uint32_t* pixels;
-	int width;
-	int height;
-	bool full_screen;
+			void stop();
+		};
 
-public:
-	SDLTarget(uint32_t* pixels, int width, int height, bool full_screen);
+		class SDLTarget : public Target {
+		protected:
+			SDL_Window* window;
+			SDL_Renderer* renderer;
+			SDL_Texture* texture;
+			SDL_Event event;
+			int remainingFrames = 60;
+			bool copy = true;
+			uint32_t* pixels;
+			int width;
+			int height;
+			bool full_screen;
 
-	~SDLTarget();
+		public:
+			SDLTarget(uint32_t* pixels, int width, int height, bool full_screen);
 
-	void loop(bool &quit, int &frames, bool &allClosed);
+			~SDLTarget();
 
-	void stop();
-};
+			void loop(bool &quit, int &frames, bool &allClosed);
+
+			void stop();
+		};
+
+	}
+}

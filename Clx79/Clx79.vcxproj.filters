@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Interface">
-      <UniqueIdentifier>{48e841ad-4184-43b9-8d93-42642347e40f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Interface">
-      <UniqueIdentifier>{c73bf8e7-f257-4bb0-b688-77c913597b27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Architecture">
       <UniqueIdentifier>{89db20ee-e2cd-42c0-b007-88948b2cb6db}</UniqueIdentifier>
     </Filter>
@@ -36,9 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Interface\Target.h">
-      <Filter>Header Files\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="Architecture\Memory.h">
       <Filter>Header Files\Architecture</Filter>
     </ClInclude>
@@ -54,13 +45,13 @@
     <ClInclude Include="Host\Graphics.h">
       <Filter>Header Files\Host</Filter>
     </ClInclude>
+    <ClInclude Include="Host\Renderer.h">
+      <Filter>Header Files\Host</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clx79.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface\Target.cpp">
-      <Filter>Source Files\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Architecture\Memory.cpp">
       <Filter>Source Files\Architecture</Filter>
@@ -72,6 +63,9 @@
       <Filter>Source Files\Host</Filter>
     </ClCompile>
     <ClCompile Include="Host\Graphics.cpp">
+      <Filter>Source Files\Host</Filter>
+    </ClCompile>
+    <ClCompile Include="Host\Renderer.cpp">
       <Filter>Source Files\Host</Filter>
     </ClCompile>
   </ItemGroup>
