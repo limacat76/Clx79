@@ -162,17 +162,17 @@
   <ItemGroup>
     <ClInclude Include="Architecture\Memory.h" />
     <ClInclude Include="Architecture\Video.h" />
-    <ClInclude Include="Bootstrap.h" />
     <ClInclude Include="Graphics\Graphics.h" />
+    <ClInclude Include="Host\Patcher.h" />
     <ClInclude Include="Interface\Target.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Architecture\Memory.cpp" />
     <ClCompile Include="Architecture\Video.cpp" />
-    <ClCompile Include="Bootstrap.cpp" />
     <ClCompile Include="Clx79.cpp" />
     <ClCompile Include="Graphics\Graphics.cpp" />
+    <ClCompile Include="Host\Patcher.cpp" />
     <ClCompile Include="Interface\Target.cpp" />
   </ItemGroup>
   <ItemGroup>

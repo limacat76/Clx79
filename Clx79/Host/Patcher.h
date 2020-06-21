@@ -22,20 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 #pragma once
-#include "Architecture/Memory.h"
+#include "../Architecture/Memory.h"
 #include <string>
 #include <vector>
 
-namespace memory_loader {
+namespace Host {
+	namespace Patcher {
+		namespace Parser {
 
-	void make_new_patch(const unsigned int destination, std::vector<Patch>& p);
+			void make_new_patch(const unsigned int destination, std::vector<Patch>& p);
 
-	Patch* get_current_patch(std::vector<Patch>& p);
+			Patch* get_current_patch(std::vector<Patch>& p);
 
-	void push_byte(const unsigned int value, std::vector<Patch>& p);
+			void push_byte(const unsigned int value, std::vector<Patch>& p);
 
+		}
+
+		void decode_patches(std::istream& from, std::vector<Patch>& p);
+
+		std::vector<Patch> patch_from_file(std::string filename);
+
+	}
 }
 
-void decode_patches(std::istream& from, std::vector<Patch>& p);
 
-std::vector<Patch> file_loader_test(std::string filename);

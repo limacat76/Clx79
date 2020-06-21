@@ -34,6 +34,12 @@
     <Filter Include="Resource Files\roms">
       <UniqueIdentifier>{79b49fef-8bc6-4978-8506-e1e9b1fe9ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Host">
+      <UniqueIdentifier>{2985fc3b-abbe-4281-9139-35f7d1ce6143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Host">
+      <UniqueIdentifier>{7d9fbd28-b798-4fec-9acb-62a0b22f1b9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Graphics.h">
@@ -45,14 +51,14 @@
     <ClInclude Include="Architecture\Memory.h">
       <Filter>Header Files\Architecture</Filter>
     </ClInclude>
-    <ClInclude Include="Bootstrap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Architecture\Video.h">
       <Filter>Header Files\Architecture</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Host\Patcher.h">
+      <Filter>Header Files\Host</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,11 +74,11 @@
     <ClCompile Include="Architecture\Memory.cpp">
       <Filter>Source Files\Architecture</Filter>
     </ClCompile>
-    <ClCompile Include="Bootstrap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Architecture\Video.cpp">
       <Filter>Source Files\Architecture</Filter>
+    </ClCompile>
+    <ClCompile Include="Host\Patcher.cpp">
+      <Filter>Source Files\Host</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

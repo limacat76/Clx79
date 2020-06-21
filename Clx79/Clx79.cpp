@@ -28,7 +28,7 @@ SOFTWARE.
 #include "Interface/Target.h"
 #include "Architecture/Memory.h"
 #include "Architecture/Video.h"
-#include "Bootstrap.h"
+#include "Host/Patcher.h"
 
 namespace options = boost::program_options;
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 	clear(ram, 0x20, 4096 * 4);
 
 	std::string rom_file = getParameter<std::string>(vm, "rom-file");
-	std::vector<Patch> patches = file_loader_test(rom_file);
+	std::vector<Patch> patches = Host::Patcher::patch_from_file(rom_file);
 	for (std::vector<Patch>::const_iterator i = patches.begin(); i != patches.end(); ++i) {
 		patch(ram, (*i));
 	}

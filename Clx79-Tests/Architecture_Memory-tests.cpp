@@ -2,7 +2,7 @@
 #include <boost/test/included/unit_test.hpp>
 #include <iostream>
 #include <string>
-#include "../Clx79/Bootstrap.h"
+#include "../Clx79/Host/Patcher.h"
 #include "../Clx79/Architecture/Memory.h"
 
 BOOST_AUTO_TEST_CASE(Canary)
@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_CASE(Canary)
 	BOOST_TEST(true);
 }
 
-BOOST_AUTO_TEST_CASE(Bootstrap_decode_patches)
+BOOST_AUTO_TEST_CASE(Host_Patcher_decode_patches)
 {
 	std::string program =
 		"; hello I am a comment \n" 
@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE(Bootstrap_decode_patches)
 	std::vector<Patch> p;
 	std::istringstream from(program);
 
-	decode_patches(from, p);
+	Host::Patcher::decode_patches(from, p);
 	BOOST_CHECK_EQUAL(p.size(), 1);
 	BOOST_CHECK_EQUAL(p[0].destination, 0x002A);
 	BOOST_CHECK_EQUAL(p[0].content.size(), 6);
@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(Memory_patch)
 
 	std::vector<Patch> p;
 	std::istringstream from(program);
-	decode_patches(from, p);
+	Host::Patcher::decode_patches(from, p);
 
 	byte* ram = new byte[1024];
 	clear(ram, 0x00, 1024);
