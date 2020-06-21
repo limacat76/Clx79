@@ -47,18 +47,6 @@ namespace Host {
 		};
 
 		class SDLTarget : public Target {
-		protected:
-			SDL_Window* window;
-			SDL_Renderer* renderer;
-			SDL_Texture* texture;
-			SDL_Event event;
-			int remainingFrames = 60;
-			bool copy = true;
-			uint32_t* pixels;
-			int width;
-			int height;
-			bool full_screen;
-
 		public:
 			SDLTarget(uint32_t* pixels, int width, int height, bool full_screen);
 
@@ -67,6 +55,28 @@ namespace Host {
 			void loop(bool &quit, int &frames, bool &allClosed);
 
 			void stop();
+
+		protected:
+			SDL_Window* window;
+
+			SDL_Renderer* renderer;
+
+			SDL_Texture* texture;
+
+			SDL_Event event;
+
+			int remainingFrames = 60;
+
+			bool copy = true;
+
+			uint32_t* pixels;
+
+			int width;
+
+			int height;
+
+			bool full_screen;
+
 		};
 
 	}
