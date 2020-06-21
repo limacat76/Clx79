@@ -36,4 +36,6 @@ namespace memory_loader {
 
 }
 
+void decode_patches(std::istream& from, std::vector<Patch>& p);
+
 std::vector<Patch> file_loader_test(std::string filename);

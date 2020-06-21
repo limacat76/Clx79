@@ -114,71 +114,38 @@ namespace memory_loader {
 
 }
 
-std::vector<Patch> manual_loader_test() {
-	std::string str;
-	std::vector<Patch> p;
-	while (getline(std::cin, str))
-	{
-		if (str.empty() || str[0] == 'q' || str[0] == 'Q') {
-			std::cout << "bye!" << std::endl;
-			break;
-		}
-
+void decode_patches(std::istream& from, std::vector<Patch>& p) {
+	std::string line;
+	while (std::getline(from, line)) {
 		std::vector<unsigned int> v;
-		if (memory_loader::parse_bytes(str.begin(), str.end(), v, p))
+		if (memory_loader::parse_bytes(line.begin(), line.end(), v, p))
 		{
+#ifdef DEBUG_PATCHING_MESSAGES
 			std::cout << "-------------------------\n";
-			std::cout << "Parsing succeeded\n";
-			std::cout << str << " Parses OK: " << std::endl;
-
-			double toSum = 0.0;
-			for (std::vector<unsigned int>::size_type i = 0; i < v.size(); ++i) {
-				std::cout << i << ": " << v[i] << std::endl;
-				toSum += v[i];
-			}
-			std::cout << "total: " << toSum;
-
+			std::cout << line << " Parses OK: " << std::endl;
 			std::cout << "\n-------------------------\n";
+#else
+			;
+#endif
 		}
 		else
 		{
+#ifdef DEBUG_PATCHING_MESSAGES
 			std::cout << "-------------------------\n";
-			std::cout << "Parsing failed\n";
+			std::cout << line << " Parsing failed\n";
 			std::cout << "-------------------------\n";
+#else
+			;
+#endif
 		}
 	}
-	return p;
 }
-
 
 std::vector<Patch> file_loader_test(std::string filename) {
 	std::vector<Patch> p;
 	std::ifstream file(filename);
 	if (file.is_open()) {
-		std::string line;
-		while (std::getline(file, line)) {
-			std::vector<unsigned int> v;
-			if (memory_loader::parse_bytes(line.begin(), line.end(), v, p))
-			{
-#ifdef DEBUG_PATCHING_MESSAGES
-				std::cout << "-------------------------\n";
-				std::cout << line << " Parses OK: " << std::endl;
-				std::cout << "\n-------------------------\n";
-#else
-				;
-#endif
-			}
-			else
-			{
-#ifdef DEBUG_PATCHING_MESSAGES
-				std::cout << "-------------------------\n";
-				std::cout << line << " Parsing failed\n";
-				std::cout << "-------------------------\n";
-#else
-				;
-#endif
-			}
-		}
+		decode_patches(file, p);
 		file.close();
 	}
 	else {
