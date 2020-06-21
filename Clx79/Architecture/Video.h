@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 #pragma once
-#include "../Graphics/Graphics.h"
+#include "../Host/Graphics.h"
 #include "Memory.h"
 
-void upscale_picture(pixel *&image, pixel *&render, const int &width, const int &logical_height, const int &physical_height);
+void upscale_picture(Host::Graphics::pixel *&image, Host::Graphics::pixel *&render, const int &width, const int &logical_height, const int &physical_height);
 
-void display_ram(pixel* a_picture, int width, int height, byte* ram, int screen_ram, int character_rom);
+void display_ram(Host::Graphics::pixel* a_picture, int width, int height, byte* ram, int screen_ram, int character_rom);

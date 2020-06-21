@@ -23,6 +23,8 @@ SOFTWARE.
  */
 #include "Video.h"
 
+using Host::Graphics::pixel;
+
 void upscale_picture(pixel *&image, pixel *&render, const int &width, const int &logical_height, const int &physical_height) {
 	// TODO D.I we need to calculate the aspect ratio, but now we are assuming that:
 	// horizontal is fixed
@@ -46,7 +48,7 @@ void display_ram(pixel* a_picture, int width, int height, byte* ram, int screen_
 			byte line = ram[character_rom + row % 8 + selected_character * 8];
 			for (int r_y = 7; r_y >= 0; r_y--) {
 				bool on = (line & 0x01) == 0x01;
-				a_picture[row * width + column + r_y] = (on ? render_color : BLACK);
+				a_picture[row * width + column + r_y] = (on ? Host::Graphics::render_color : Host::Graphics::BLACK);
 				line = line >> 1;
 			}
 		}

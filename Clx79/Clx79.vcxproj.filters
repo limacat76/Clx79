@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Graphics">
-      <UniqueIdentifier>{892241da-2e29-4091-9a2d-902527c712d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Graphics">
-      <UniqueIdentifier>{0e4b8f54-2167-428b-a5fe-d01eb7859ee5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Interface">
       <UniqueIdentifier>{48e841ad-4184-43b9-8d93-42642347e40f}</UniqueIdentifier>
     </Filter>
@@ -42,9 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics\Graphics.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Interface\Target.h">
       <Filter>Header Files\Interface</Filter>
     </ClInclude>
@@ -60,13 +51,13 @@
     <ClInclude Include="Host\Patcher.h">
       <Filter>Header Files\Host</Filter>
     </ClInclude>
+    <ClInclude Include="Host\Graphics.h">
+      <Filter>Header Files\Host</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Clx79.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Graphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Interface\Target.cpp">
       <Filter>Source Files\Interface</Filter>
@@ -78,6 +69,9 @@
       <Filter>Source Files\Architecture</Filter>
     </ClCompile>
     <ClCompile Include="Host\Patcher.cpp">
+      <Filter>Source Files\Host</Filter>
+    </ClCompile>
+    <ClCompile Include="Host\Graphics.cpp">
       <Filter>Source Files\Host</Filter>
     </ClCompile>
   </ItemGroup>

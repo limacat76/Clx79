@@ -24,7 +24,7 @@ SOFTWARE.
 #include <iostream>
 #include <conio.h>
 #include <boost/program_options.hpp>
-#include "Graphics/Graphics.h"
+#include "Host/Graphics.h"
 #include "Interface/Target.h"
 #include "Architecture/Memory.h"
 #include "Architecture/Video.h"
@@ -49,10 +49,12 @@ template <typename T> T getParameter(options::variables_map value_map, std::stri
 	return result;
 }
 
+using Host::Graphics::pixel;
+
 void run_engine(const int &no_threads, const int &width, const int &logical_height, const int &physical_height,
 	            pixel *&render, Target *target, const bool &log_threads, const bool &log_total, byte *&ram) {
 	pixel* image = new pixel[width * logical_height];
-	make_picture_blank(image, width, logical_height);
+	Host::Graphics::make_picture_blank(image, width, logical_height);
 	bool quit = false;
 	bool allClosed = false;
 	int frames = 0;
@@ -99,13 +101,13 @@ int main(int argc, char *argv[])
 	bool auto_quit = getParameter<bool>(vm, "auto-quit");
 	int target_number = getParameter<int>(vm, "target");
 
-	set_render_color(getParameter<int>(vm, "color"));
+	Host::Graphics::set_render_color(getParameter<int>(vm, "color"));
 
 	int width = 640;
 	int logical_height = 200;
 	int physical_height = 480;
 	pixel* render = new pixel[width * physical_height];
-	make_picture_black(render, width, physical_height);
+	Host::Graphics::make_picture_black(render, width, physical_height);
 	Target* target;
 	switch (target_number) {
 	case 0:
